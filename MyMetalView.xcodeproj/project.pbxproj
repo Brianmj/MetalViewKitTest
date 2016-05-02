@@ -12,6 +12,8 @@
 		C1E64FC11CD586760097766E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1E64FBF1CD586760097766E /* Main.storyboard */; };
 		C1E64FC31CD586760097766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1E64FC21CD586760097766E /* Assets.xcassets */; };
 		C1E64FC61CD586760097766E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1E64FC41CD586760097766E /* LaunchScreen.storyboard */; };
+		C1E64FD11CD586C00097766E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E64FCF1CD586C00097766E /* Metal.framework */; };
+		C1E64FD21CD586C00097766E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E64FD01CD586C00097766E /* MetalKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		C1E64FC21CD586760097766E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1E64FC51CD586760097766E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1E64FC71CD586760097766E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1E64FCF1CD586C00097766E /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		C1E64FD01CD586C00097766E /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1E64FD11CD586C00097766E /* Metal.framework in Frameworks */,
+				C1E64FD21CD586C00097766E /* MetalKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +44,8 @@
 		C1E64FAF1CD586760097766E = {
 			isa = PBXGroup;
 			children = (
+				C1E64FCF1CD586C00097766E /* Metal.framework */,
+				C1E64FD01CD586C00097766E /* MetalKit.framework */,
 				C1E64FBA1CD586760097766E /* MyMetalView */,
 				C1E64FB91CD586760097766E /* Products */,
 			);
@@ -96,7 +104,7 @@
 				TargetAttributes = {
 					C1E64FB71CD586760097766E = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BFECS9F9D;
+						DevelopmentTeam = APM9TSWZU7;
 					};
 				};
 			};
@@ -252,10 +260,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MyMetalView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.knu.MyMetalView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -263,10 +274,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MyMetalView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.knu.MyMetalView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
