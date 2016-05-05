@@ -15,7 +15,7 @@ class ViewController: UIViewController, MTKViewDelegate {
     var device: MTLDevice! = nil
     var commandQueue: MTLCommandQueue! = nil
     var library: MTLLibrary! = nil
-    var myView: MTKView! = nil
+    var mtlView: MTKView!    // set the view controller's view as a MTKView which will be assigned to mtlView later
     
     
     override func viewDidLoad() {
@@ -63,18 +63,18 @@ class ViewController: UIViewController, MTKViewDelegate {
     }
     
     func setupView() {
-        myView = view as? MTKView
-        myView.device = device
-        myView.delegate = self
-        myView.colorPixelFormat = .BGRA8Unorm
-        myView.depthStencilPixelFormat = .Depth32Float_Stencil8
-        myView.framebufferOnly = true
-        myView.clearColor = MTLClearColor(red: 0.3, green: 0.6, blue: 0.53, alpha: 1.0)
-        myView.clearDepth = 1.0
+        mtlView = view as? MTKView
+        mtlView.device = device
+        mtlView.delegate = self
+        mtlView.colorPixelFormat = .BGRA8Unorm
+        mtlView.depthStencilPixelFormat = .Depth32Float_Stencil8
+        mtlView.framebufferOnly = true
+        mtlView.clearColor = MTLClearColor(red: 0.3, green: 0.6, blue: 0.53, alpha: 1.0)
+        mtlView.clearDepth = 1.0
     }
     
     func configureRenderPassDescriptor(rpd: MTLRenderPassDescriptor) -> MTLRenderPassDescriptor{
-        
+        return MTLRenderPassDescriptor()
     }
     
 
