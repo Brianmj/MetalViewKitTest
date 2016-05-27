@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brian Jones. All rights reserved.
 //
 
+
 import UIKit
 import Metal
 import MetalKit
@@ -16,6 +17,7 @@ class ViewController: UIViewController, MTKViewDelegate {
     var commandQueue: MTLCommandQueue! = nil
     var library: MTLLibrary! = nil
     var mtlView: MTKView!    // set the view controller's view as a MTKView which will be assigned to mtlView later
+    // var depthTexture: MTLTexture! = nil you do not need this as MTL creates it's own depth stencil texture
     
     
     override func viewDidLoad() {
@@ -23,6 +25,7 @@ class ViewController: UIViewController, MTKViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         setupMetal()
         setupView()
+        //setupDepthTexture() no longer needed as metal view can create it's own depth stencil texture
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,18 +38,22 @@ class ViewController: UIViewController, MTKViewDelegate {
         
         let cb = commandQueue.commandBuffer()
         let rpd = view.currentRenderPassDescriptor
+        let currentDrawable = view.currentDrawable
         
         rpd?.colorAttachments[0].loadAction = .Clear
         rpd?.colorAttachments[0].storeAction = .Store
-        rpd?.colorAttachments[0].clearColor
+        rpd?.colorAttachments[0].texture = currentDrawable?.texture
         rpd?.depthAttachment.loadAction = .Clear
         rpd?.depthAttachment.storeAction = .DontCare
+        rpd?.depthAttachment.texture = view.depthStencilTexture
+        
+        
         
         let ce = cb.renderCommandEncoderWithDescriptor(rpd!)
         ce.endEncoding()
         
         
-        cb.presentDrawable(view.currentDrawable!)
+        cb.presentDrawable(currentDrawable!)
         cb.commit()
     }
     
@@ -67,16 +74,16 @@ class ViewController: UIViewController, MTKViewDelegate {
         mtlView.device = device
         mtlView.delegate = self
         mtlView.colorPixelFormat = .BGRA8Unorm
-        mtlView.depthStencilPixelFormat = .Depth32Float_Stencil8
-        mtlView.framebufferOnly = true
         mtlView.clearColor = MTLClearColor(red: 0.3, green: 0.6, blue: 0.53, alpha: 1.0)
         mtlView.clearDepth = 1.0
+        mtlView.depthStencilPixelFormat = .Depth32Float_Stencil8 // I guess setting this is where metal create it's own depth stencil texture
+        
+        mtlView.framebufferOnly = true
     }
     
-    func configureRenderPassDescriptor(rpd: MTLRenderPassDescriptor) -> MTLRenderPassDescriptor{
-        return MTLRenderPassDescriptor()
-    }
-    
-
+    /*func setupDepthTexture() {
+     let depthTextureDescriptor = MTLTextureDescriptor.texture2DDescriptorWithPixelFormat(.Depth32Float_Stencil8, width: Int(view.bounds.width), height: Int(view.bounds.height), mipmapped: false)
+     depthTexture = device.newTextureWithDescriptor(depthTextureDescriptor)
+     }*/
 }
 
